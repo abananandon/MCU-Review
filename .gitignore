@@ -1,0 +1,17 @@
+.vscode/
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/c_cpp_properties.json
+!.vscode/tasks.json
+.claude/
+.cache/
+Build/
+Outputs/
+Docs/
+Drivers/CMSIS
+Drivers/STM32F1xx_HAL_Driver
+Middlewares/FreeRTOS
+Startup/arm
+Startup/gcc
+
+CLAUDE.md
