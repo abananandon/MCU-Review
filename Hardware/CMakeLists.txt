@@ -9,10 +9,16 @@ file(GLOB_RECURSE HW_SOURCES CONFIGURE_DEPENDS
 if(HW_SOURCES)
     add_library(hardware STATIC ${HW_SOURCES})
 
-    target_include_directories(hardware PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/BSP
-        ${CMAKE_CURRENT_SOURCE_DIR}/SYSTEM
-    )
+    # Derive include directories from source file locations so that
+    # headers in any subdirectory (e.g. BSP/led/led.h) are directly
+    # accessible via bare #include "led.h" from dependents
+    foreach(hw_src ${HW_SOURCES})
+        get_filename_component(hw_src_dir ${hw_src} DIRECTORY)
+        list(APPEND HW_INCLUDE_DIRS ${hw_src_dir})
+    endforeach()
+    list(REMOVE_DUPLICATES HW_INCLUDE_DIRS)
+
+    target_include_directories(hardware PUBLIC ${HW_INCLUDE_DIRS})
 
     target_link_libraries(hardware PUBLIC drivers)
 else()
