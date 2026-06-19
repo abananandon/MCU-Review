@@ -47,6 +47,7 @@ HAL_StatusTypeDef led_on(uint8_t index)
     } else {
         HAL_GPIO_WritePin(g_led[index].port, g_led[index].pin, GPIO_PIN_SET);
     }
+    g_led[index].state = LED_STATE_ON;
 
     return HAL_OK;
 }
@@ -62,6 +63,7 @@ HAL_StatusTypeDef led_off(uint8_t index)
     } else {
         HAL_GPIO_WritePin(g_led[index].port, g_led[index].pin, GPIO_PIN_RESET);
     }
+    g_led[index].state = LED_STATE_OFF;
 
     return HAL_OK;
 }
@@ -96,9 +98,9 @@ HAL_StatusTypeDef led_hardware_init(void)
         HAL_GPIO_Init(g_led[i].port, &g_led[i].gpio);
 
         if (g_led[i].state  == LED_STATE_OFF) {
-            ret = led_on(i);
-        } else {
             ret = led_off(i);
+        } else {
+            ret = led_on(i);
         }
         if (ret != HAL_OK) {
             return HAL_ERROR;
