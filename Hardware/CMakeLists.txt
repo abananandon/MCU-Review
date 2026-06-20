@@ -20,13 +20,13 @@ if(HW_SOURCES)
 
     target_include_directories(hardware PUBLIC ${HW_INCLUDE_DIRS})
 
-    target_link_libraries(hardware PUBLIC drivers)
+    target_link_libraries(hardware PUBLIC common drivers)
 else()
     # No sources yet — create a placeholder INTERFACE target
     # that will be upgraded to STATIC when BSP/SYSTEM sources are added
     add_library(hardware INTERFACE)
 
-    target_link_libraries(hardware INTERFACE drivers)
+    target_link_libraries(hardware INTERFACE common drivers)
 
     message(STATUS "Hardware: no BSP or SYSTEM sources found; using INTERFACE placeholder")
 endif()

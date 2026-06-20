@@ -24,10 +24,10 @@ typedef struct {
     GPIO_InitTypeDef    gpio;
 } Led_t;
 
-HAL_StatusTypeDef led_hardware_init(void);
-HAL_StatusTypeDef led_on(uint8_t index);
-HAL_StatusTypeDef led_off(uint8_t index);
-HAL_StatusTypeDef led_toggle(uint8_t index);
+HAL_StatusTypeDef Led_Hardware_Init(void);
+HAL_StatusTypeDef Led_On(uint8_t index);
+HAL_StatusTypeDef Led_Off(uint8_t index);
+HAL_StatusTypeDef Led_Toggle(uint8_t index);
 
 #endif
 
