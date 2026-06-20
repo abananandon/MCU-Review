@@ -71,4 +71,7 @@ SECTIONS
         . = ALIGN(4);
         _ebss = .;
     } >RAM
+
+    /* ── Heap start marker (required by _sbrk in nosys.specs) ── */
+    end = .;
 }

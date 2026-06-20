@@ -1,6 +1,6 @@
 #include "led.h"
 
-static HAL_StatusTypeDef led_clock_enable(GPIO_TypeDef *port)
+static HAL_StatusTypeDef Led_Clock_Enable(GPIO_TypeDef *port)
 {
     if (port == GPIOA) {
         __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -36,7 +36,7 @@ static Led_t g_led[LED_NUM] = {
     }
 };
 
-HAL_StatusTypeDef led_on(uint8_t index)
+HAL_StatusTypeDef Led_On(uint8_t index)
 {
     if (index < 0 || index > LED_NUM) {
         return HAL_ERROR;
@@ -52,7 +52,7 @@ HAL_StatusTypeDef led_on(uint8_t index)
     return HAL_OK;
 }
 
-HAL_StatusTypeDef led_off(uint8_t index)
+HAL_StatusTypeDef Led_Off(uint8_t index)
 {
     if (index < 0 || index > LED_NUM) {
         return HAL_ERROR;
@@ -68,25 +68,25 @@ HAL_StatusTypeDef led_off(uint8_t index)
     return HAL_OK;
 }
 
-HAL_StatusTypeDef led_toggle(uint8_t index)
+HAL_StatusTypeDef Led_Toggle(uint8_t index)
 {
     if (index < 0 || index > LED_NUM) {
         return HAL_ERROR;
     }
 
     if (g_led[index].state == LED_STATE_OFF) {
-        return led_on(index);
+        return Led_On(index);
     } else {
-        return led_off(index);
+        return Led_Off(index);
     }
 }
 
-HAL_StatusTypeDef led_hardware_init(void)
+HAL_StatusTypeDef Led_Hardware_Init(void)
 {
     HAL_StatusTypeDef ret = HAL_ERROR;
 
     for (uint8_t i = 0; i < LED_NUM; i++) {
-        ret = led_clock_enable(g_led[i].port);
+        ret = Led_Clock_Enable(g_led[i].port);
         if (ret != HAL_OK) {
             return HAL_ERROR;
         }
@@ -98,9 +98,9 @@ HAL_StatusTypeDef led_hardware_init(void)
         HAL_GPIO_Init(g_led[i].port, &g_led[i].gpio);
 
         if (g_led[i].state  == LED_STATE_OFF) {
-            ret = led_off(i);
+            ret = Led_Off(i);
         } else {
-            ret = led_on(i);
+            ret = Led_On(i);
         }
         if (ret != HAL_OK) {
             return HAL_ERROR;

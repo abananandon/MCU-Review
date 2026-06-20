@@ -4,6 +4,7 @@
 file(GLOB_RECURSE COMPONENT_SOURCES CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/Filter/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Math/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataStructures/*.c
 )
 
 if(COMPONENT_SOURCES)
@@ -12,13 +13,14 @@ if(COMPONENT_SOURCES)
     target_include_directories(components PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Filter
         ${CMAKE_CURRENT_SOURCE_DIR}/Math
+        ${CMAKE_CURRENT_SOURCE_DIR}/DataStructures
     )
 
-    target_link_libraries(components PUBLIC config)
+    target_link_libraries(components PUBLIC common config)
 else()
     add_library(components INTERFACE)
 
-    target_link_libraries(components INTERFACE config)
+    target_link_libraries(components INTERFACE common config)
 
     message(STATUS "Components: no Filter or Math sources found; using INTERFACE placeholder")
 endif()
