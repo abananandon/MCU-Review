@@ -12,7 +12,7 @@
 #define I2C_SCL_PIN     GPIO_PIN_12
 #define I2C_SCL_CLK_ENABLE()    do {__HAL_RCC_GPIOC_CLK_ENABLE();} while(0)
 
-#define I2C_DELAY_US(x)     delay_us(x)
+#define I2C_DELAY_US()     delay_us(2)
 
 void I2C_Init(void);
 void I2C_Start(void);
