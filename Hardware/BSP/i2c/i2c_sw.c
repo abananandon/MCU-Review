@@ -101,6 +101,7 @@ void I2C_Stop(void)
  */
 void I2C_Ack(void)
 {
+    i2c_scl_set(0);
     i2c_sda_set(0);
     I2C_DELAY_US();
     i2c_scl_set(1);
@@ -117,6 +118,7 @@ void I2C_Ack(void)
  */
 void I2C_NAck(void)
 {
+    i2c_scl_set(0);
     i2c_sda_set(1);
     I2C_DELAY_US();
     i2c_scl_set(1);
@@ -158,6 +160,7 @@ uint8_t I2C_SendByte(uint8_t data)
 uint8_t I2C_ReceiveData(void)
 {
     uint8_t data = 0;
+    i2c_scl_set(0);
     i2c_sda_set(1);
 
     for (uint8_t i = 0; i < 8 ; i++) {
@@ -181,6 +184,7 @@ uint8_t I2C_ReceiveData(void)
  */
 uint8_t I2C_WaitAck(void)
 {
+    i2c_scl_set(0);
     i2c_sda_set(1);
     I2C_DELAY_US();
     i2c_scl_set(1);
